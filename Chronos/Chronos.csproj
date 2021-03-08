@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	
+	<IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    
+    <PlatformTarget>x64</PlatformTarget>
+    <Configurations>Debug;Release;Distribution</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <OutputPath>..\Build\Debug</OutputPath>
+    <DefineConstants>TRACE_EXECUTION</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <OutputPath>..\Build\Release</OutputPath>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE_EXECUTION</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Distribution'">
+    <OutputPath>..\Build\Release</OutputPath>
+    <Optimize>true</Optimize>
+    <DefineConstants></DefineConstants>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.0.0" />
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-28821-02" />
+  </ItemGroup>
+
+</Project>

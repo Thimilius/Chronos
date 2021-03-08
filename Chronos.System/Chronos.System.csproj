@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    
+	<!-- We do want to allow unsafe code -->
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	
+    <!-- Do not generate config files -->
+    <NoConfig>true</NoConfig>
+      
+    <!-- We do not want any reference to standard libraries and frameworks -->
+    <NoStdLib>true</NoStdLib>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    
+    <!-- Manually set the version of the metadata -->  
+    <RuntimeMetadataVersion>v1.0.0</RuntimeMetadataVersion>
+      
+    <!-- We do not need any assembly info -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\Build\Debug</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\Build\Release</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+</Project>
