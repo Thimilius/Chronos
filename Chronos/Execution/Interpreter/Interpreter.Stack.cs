@@ -265,9 +265,6 @@ namespace Chronos.Execution {
 
             // NOTE: Loading a function pointer means pushing the index to the method on the stack.
 
-            IntPtr pointer = GCHandle.ToIntPtr(method.Handle);
-            IntPtr pointer2 = GCHandle.ToIntPtr(method.Handle);
-
             m_Frame.Push(RuntimeType.NativeInt, GCHandle.ToIntPtr(method.Handle));
         }
 

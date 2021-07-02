@@ -107,6 +107,12 @@ namespace Chronos.Execution {
             m_Frame.Push(RuntimeType.Int32, size);
         }
 
+        /// <summary>
+        /// Loads the runtime representation of a metadata token.
+        /// 
+        /// Stack: ... -> ..., RuntimeHandle
+        /// </summary>
+        /// <param name="token">The token to load the metadata from</param>
         private void InterpretLoadToken(EntityHandle token) {
             // NOTE: For now we just support loading a type token.
             // The instruction is actually capable of loading a field or a method token as well.
