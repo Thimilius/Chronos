@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	
 	<IlcOptimizationPreference>Speed</IlcOptimizationPreference>
@@ -29,8 +29,8 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.0.0" />
-    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="6.0.0-*" />
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.0.1" />
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="7.0.0-preview.4.22229.4" />
   </ItemGroup>
 
 </Project>

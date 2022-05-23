@@ -136,7 +136,7 @@ namespace Chronos.Execution {
         /// <param name="method">The entry point to run</param>
         /// <param name="applicationArguments">The arguments to the application</param>
         /// <returns>The exit code of the entry point</returns>
-        public int RunEntryPoint(MethodDescription method, IList<string> applicationArguments) {
+        public int RunEntryPoint(MethodDescription method, IReadOnlyList<string> applicationArguments) {
             Debug.Assert(method != null);
             Debug.Assert(applicationArguments != null);
 
@@ -250,7 +250,7 @@ namespace Chronos.Execution {
         /// <param name="method">The entry point method</param>
         /// <param name="applicationArguments">The arguments to the application</param>
         /// <returns>The prepared method call data</returns>
-        private unsafe MethodCallData PrepareMethodCallDataForEntryPoint(MethodDescription method, IList<string> applicationArguments) {
+        private unsafe MethodCallData PrepareMethodCallDataForEntryPoint(MethodDescription method, IReadOnlyList<string> applicationArguments) {
             Debug.Assert(method != null);
             Debug.Assert(applicationArguments != null);
 

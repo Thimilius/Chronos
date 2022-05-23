@@ -10,7 +10,6 @@ namespace Chronos {
         /// <param name="args">The command line arguments</param>
         private static void Main(string[] args) {
             bool success = ParseCommandLineArguments(args, out VirtualMachineOptions options);
-            
             if (!success) {
                 return;
             }

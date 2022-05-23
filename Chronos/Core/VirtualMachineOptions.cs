@@ -13,7 +13,7 @@ namespace Chronos {
         /// <summary>
         /// The arguments to the application.
         /// </summary>
-        public IList<string> ApplicationArguments { get; set; }
+        public IReadOnlyList<string> ApplicationArguments { get; set; }
         /// <summary>
         /// The tracing mode used.
         /// </summary>
