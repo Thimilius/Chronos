@@ -1,9 +1,25 @@
-﻿using Chronos.Tracing;
-using McMaster.Extensions.CommandLineUtils;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using CommandLine;
+using Chronos.Tracing;
+using System.Linq;
 
 namespace Chronos {
     internal static class Program {
+        /// <summary>
+        /// The command line options for the application.
+        /// </summary>
+        public class CommandLineOptions {
+            [Option(shortName: 't', longName: "trace", Required = false, HelpText = "Specifies the tracing mode.", Default = TracingMode.None)]
+            public TracingMode TracingMode { get; set; }
+
+            [Value(0, Required = true, MetaName = "path-to-application", HelpText = "The path to an application .dll file to execute.")]
+            public string PathToApplication { get; set; }
+            
+            [Option(longName: "application-arguments", Required = false, HelpText = "The arguments the application should recieve.")]
+            public IEnumerable<string> ApplicationArguments { get; set; }
+        }
+
         /// <summary>
         /// Main entry point for the program.
         /// </summary>
@@ -40,43 +56,20 @@ namespace Chronos {
         /// <param name="options">The parsed options to be returned</param>
         /// <returns>True if the parsing was successfull otherwise false</returns>
         private static bool ParseCommandLineArguments(string[] args, out VirtualMachineOptions options) {
-            // Setup and define available command line options
-            var app = new CommandLineApplication() {
-                FullName = "Chronos",
-            };
-            app.HelpOption().Description = "Display help.";
-            app.VersionOption("-v|--version", "1.0.0").Description = "Display version.";
-            var traceModeOption = app.Option("-t|--trace", "Specifies the tracing mode.", CommandOptionType.SingleValue)
-                .Accepts(v => v.Enum<TracingMode>());
-            var applicationPathArgument = app.Argument("path-to-application", "The path to an application .dll file to execute.")
-                .IsRequired()
-                .Accepts(v => v.ExistingFile());
-            var applicationArgumentsArgument = app.Argument("application-arguments", "The arguments the application should recieve.", true);
-            
             bool success = false;
-            options = null;
-            VirtualMachineOptions result = null;
-            app.OnExecute(() => {
-                success = true;
 
-                result = new VirtualMachineOptions() {
-                    PathToApplication = applicationPathArgument.Value,
-                    ApplicationArguments = applicationArgumentsArgument.Values,
-                    TracingMode = Enum.Parse<TracingMode>(traceModeOption.Value())
+            options = Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(opt => {
+                success = true;
+                return new VirtualMachineOptions() {
+                    TracingMode = opt.TracingMode,
+                    PathToApplication = opt.PathToApplication,
+                    ApplicationArguments = opt.ApplicationArguments.ToList(),
                 };
+            },
+            errors => {
+                success = false;
+                return new VirtualMachineOptions();
             });
-            
-            // We want to directly display the help option if no arguments get passed.
-            if (args.Length == 0) {
-                app.ShowHelp();
-            } else {
-                try {
-                    app.Execute(args);
-                    options = result;
-                } catch (Exception e) {
-                    PrintException(e);
-                }
-            }
 
             return success;
         }
