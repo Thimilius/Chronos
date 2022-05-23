@@ -1,7 +1,7 @@
 @echo off
 
-pushd %~dp0\..\Build\Release\netcoreapp3.1\win-x64\native\
+pushd %~dp0\..\Build\Release\net6.0\win-x64\native\
 
-Chronos -t Diagnostic %~dp0\..\Build\Debug\netcoreapp3.1\Sandbox.dll %*
+Chronos --trace=Diagnostic %~dp0\..\Build\Debug\net6.0\Sandbox.dll %*
 
 popd

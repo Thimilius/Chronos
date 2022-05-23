@@ -1,7 +1,7 @@
 @echo off
 
-pushd %~dp0\..\Build\Release\netcoreapp3.1\win-x64\native\
+pushd %~dp0\..\Build\Release\net6.0\win-x64\native\
 
-Chronos -t Diagnostic %~dp0\..\Build\Debug\netcoreapp3.1\Chronos.Tests.dll %*
+Chronos --trace=Diagnostic %~dp0\..\Build\Debug\net6.0\Chronos.Tests.dll %*
 
 popd
